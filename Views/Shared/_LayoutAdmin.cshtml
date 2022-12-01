@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Administrador</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h2>Administração das despesas</h2>
+            </div>
+            <div class="col-6" style="text-align: right;">
+                Usuário Logado:
+                @HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")
+                <label></label> -
+                <a asp-controller="Dashboard" asp-action="Logout">Sair</a>
+            </div>
+            <div>
+                <a asp-controller="Usuarios">Usuários</a> |
+                <a asp-controller="Despesa">Despesa</a> |
+                <a asp-controller="CategoriaDespesa">Categoria</a> |
+                <a asp-controller="Conta">Conta</a>
+            </div>
+            <div><hr></div>
+        </div>
+        <div class="row">
+            @RenderBody()
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>

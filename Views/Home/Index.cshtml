@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Despesas.Models.Conta>
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_LayoutHome";
+
+}
+<div class="sumary gap-8">
+
+    <div class='py-4 paddingx-8 rounded bg-white'>
+      
+      <header class='d-flex align-items-center justify-content-between'>
+        <h5 class="m-0">Mês Anterior</h5>
+         <img src="@(ViewBag.mesAtualMaiorMesAnterior ? "images/Saídas.svg" : "images/Entradas.svg")" alt="menor"/>
+      </header>
+      <strong class='sumary-value d-block mt-3 text-[2rem] font-medium leading-[3rem]'>@ViewBag.gastoMesAnterior</strong>
+    </div>
+
+    <div class='py-4 paddingx-8 rounded bg-white'>
+      
+      <header class='d-flex align-items-center justify-content-between'>
+        <h5 class="m-0">Mês Atual</h5>
+        <img src="@(ViewBag.mesAtualMaiorMesAnterior ? "images/Entradas.svg" : "images/Saídas.svg")" alt="menor"/>
+      </header>
+      <strong class='sumary-value d-block mt-3 text-[2rem] font-medium leading-[3rem]'>@ViewBag.gastoMesAtual</strong>
+    </div>
+
+    <div class='py-4 paddingx-8 rounded bg-green text-white'>
+      
+      <header class='d-flex align-items-center justify-content-between'>
+        <h5 class="m-0">Anual</h5>
+        <img src="images/Sifrao.svg" alt="saída"/>
+      </header>
+      <strong class='sumary-value d-block mt-3 text-[2rem] font-medium leading-[3rem]'>@ViewBag.gastoAnual</strong>
+    </div>
+
+</div>
+
+<div class='mt-16'>
+    <div class='table-dashboard'>
+        <table >
+            <thead >
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Categoria</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody >
+                @foreach (var item in Model)
+                {
+                    <tr >
+                        <td>@Html.DisplayFor(modelItem => item.Despesa.Descricao) </td>
+                        <td class="text-danger">@Html.DisplayFor(modelItem => item.Valor)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Despesa.CategoriaDespesa.Descricao)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Data)</td>
+                    </tr>   
+                }         
+            </tbody>
+        </table>
+    </div>
+</div>

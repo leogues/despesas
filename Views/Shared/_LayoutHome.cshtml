@@ -1,0 +1,58 @@
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Despesas</title>
+    @await Html.PartialAsync("_Favicons")
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Layout.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"> 
+
+</head>
+<body>
+    <header class='bg-indigos d-flex justify-content-center'>
+      <div class='nav-bounds container m-0 d-flex justify-content-between align-items-center w-100'>
+        <a asp-controller="Home" asp-action="Index">
+          <img src="images/Logo.svg" alt="Despesas" height='40 px'/>
+        </a>
+        <div class='nav-header-user d-flex align-items-center'>
+          <h5 class="text-md text-white m-0 ">@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")</h5>
+          <a asp-controller="Conta" asp-action="Create">
+            <Button type='button' class='btn-default rounded px-4 border-0 text-white hover-shadow'>
+              Nova transação
+            </Button>
+          </a>
+          <a asp-controller="Dashboard" asp-action="Index">
+            <Button type='button' class='btn-default rounded px-4 border-0 text-white hover-shadow'>
+              Dashboard
+            </Button>
+          </a>
+          <a asp-controller="Dashboard" asp-action="Logout">
+            <Button type='button' class='btn-default rounded px-4 border-0 text-white hover-shadow'>
+              Logout
+            </Button>
+          </a>
+        </div>
+        
+      </div>
+    </header>
+    <div class="w-100 d-flex justify-content-center">
+      <div class="w-100 container m-0 py-3 paddingx-9">
+        @RenderBody()
+      </div>
+    </div>
+    
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

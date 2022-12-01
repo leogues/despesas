@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Despesas.Models.Usuario>
+
+@{
+    Layout = "_LayoutDashboard";
+}
+
+<a asp-action="Create">
+    <Button type='button' class='btn-default rounded px-4 border-0 text-white hover-shadow float-right'>
+        Criar novo
+    </Button>
+</a>
+<div class="table-home mt-5">
+    <table >
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Login)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Login)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Alterar</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Visualizar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Remover</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

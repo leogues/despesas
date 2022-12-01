@@ -1,0 +1,116 @@
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Despesas</title>
+    @await Html.PartialAsync("_Favicons")
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Layout.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"> 
+
+</head>
+<body class="d-flex">
+    
+  <div class="nav-bar-dashboard d-flex flex-row p-0 vh-100 shadow text-primary100 font-family-inter bg-indigos">
+    <div class="d-flex flex-column p-0 justify-content-between">
+      <nav class="d-flex flex-column pt-4 gap-6">
+        <header class="px-4 mt-4 align-items-start">
+          <a asp-controller="Home" asp-action="Index">
+            <img src="~/images/Logo.svg" alt="Despesas" height='35 px'/>
+          </a>
+        </header>
+        <form class="input-label m-3">
+          <button class="btn btn-transparent p-0 m-0" type="submit" value="Filter">
+            <img src="~/images/Search.png" alt="Search" height='30 px'/>
+          </button>
+          <input name="SearchString" type="text" class="bg-transparent border-0 outline-none " placeholder="Search"/>
+        </form>
+        <ul class="d-flex flex-column py-0 px-3 gap-1 text-sm">
+          <a asp-controller="Home" asp-action="Index">
+            <li class="p-2 rounded d-flex gap-4 align-items-center 
+              @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")
+            ">
+                <img src="~/images/botao-de-inicio.png" alt="Logout" height='22px'/>
+                <span>Home</span>
+            </li>
+          </a>
+          <a asp-controller="Dashboard" asp-action="Index">
+            <li class="p-2 rounded d-flex gap-4 align-items-center 
+              @(ViewContext.RouteData.Values["Controller"].ToString() == "Dashboard" ? "active" : "")
+            ">
+              <img src="~/images/insight.png" alt="Logout" height='22px'/>
+              <span>Dashboard</span>
+            </li>
+          </a>
+          <a asp-controller="Conta">
+            <li class="p-2 rounded d-flex gap-4 align-items-center 
+              @(ViewContext.RouteData.Values["Controller"].ToString() == "Conta" ? "active" : "")
+            ">
+              
+              <img src="~/images/pago.png" alt="Logout" height='22px'/>
+              <span>Conta</span>
+            </li>
+          </a>
+          <a asp-controller="Despesa">
+            <li class="p-2 rounded d-flex gap-4 align-items-center 
+              @(ViewContext.RouteData.Values["Controller"].ToString() == "Despesa" ? "active" : "")
+            ">
+              
+              <img src="~/images/despesas.png" alt="Logout" height='22px'/>
+              <span>Despesa</span>
+            </li>
+          </a>
+          <a asp-controller="CategoriaDespesa">
+            <li class="p-2 rounded d-flex gap-4 align-items-center 
+              @(ViewContext.RouteData.Values["Controller"].ToString() == "CategoriaDespesa" ? "active" : "")
+            ">
+              
+              <img src="~/images/categorias.png" alt="Logout" height='22px'/>
+              <span>Categoria</span>
+            </li>
+          </a>
+          <a  asp-controller="Usuarios">
+            <li class="p-2 rounded d-flex gap-4 align-items-center 
+              @(ViewContext.RouteData.Values["Controller"].ToString() == "Usuarios" ? "active" : "")
+            ">
+              
+              <img src="~/images/lista-de-usuarios.png" alt="Logout" height='22px'/>
+              <span>Usuários</span>
+            </li>
+          </a>
+        </ul>
+      </nav>
+      <footer class="d-flex flex-column px-3 pb-4 gap-6">
+        <div class="account">
+          <div class="d-flex flex-column p-0">
+            <span class="text-xs text-white">@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")</span>
+            <span class="text-xss">@HttpContextAccessor.HttpContext.Session.GetString("UsuarioLogado")</span>
+          </div>
+          <a asp-controller="Dashboard" asp-action="Logout">
+            <img src="~/images/logout.png" alt="Logout" height='20px'/>
+          </a>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <div class="d-flex flex-column w-100 m-4 justify-content-center align-items-center">
+    @RenderBody()
+  </div>
+  
+    
+    
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

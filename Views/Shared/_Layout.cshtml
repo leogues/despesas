@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Despesas</title>
+    @await Html.PartialAsync("_Favicons")
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Layout.css" />
+</head>
+<body>
+    <header class='bg-indigos shadow-sm d-flex justify-content-center'>
+        <div class='py-3 container m-0 d-flex justify-content-between align-items-center w-100'>
+            <a asp-controller="Home" asp-action="Index">
+                <img src="~/images/Logo.svg" alt="Despesas" height='35 px'/>
+            </a>
+            @if(HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado") != null){
+                <div class='nav-header-user d-flex align-items-center'>
+                    <h5 class="text-md text-white m-0 ">@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")</h5>
+                    <a asp-controller="Dashboard" asp-action="Logout">
+                        <Button type='button' class='btn-default rounded px-4 border-0 text-white hover-shadow'>
+                        Logout
+                        </Button>
+                    </a>
+                </div>
+            }
+        </div>
+    </header>
+
+    
+    <div class="d-flex justify-content-center align-items-center vh-75">
+        <div class="w-100 max-w-xl m-0 py-3 paddingx-9 ">
+            @RenderBody()
+        </div>
+        
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

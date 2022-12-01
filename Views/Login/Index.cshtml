@@ -1,0 +1,38 @@
+﻿@model Despesas.Models.Usuario
+@{
+    Layout = "_Layout";
+}
+
+<div class=" mt-5 p-5 rounded-lg bg-white shadow-sm ">
+    <header class="d-flex flex-column align-items-center gap-2">
+        <div class="d-flex align-items-center gap-2">
+            <img src="~/images/Logo-Sem-Nome.svg" alt="Despesas" height='40 px'/>
+            <h2 class="text-indigos-light text-lg m-0">Despesa</h2>
+        </div>
+        <h3 class="text-indigos-light text-md">Faça login para começar</h1>
+    </header>
+    
+    <form class="d-flex flex-column gap-4 mt-4"asp-controller="Login" asp-action="Logar" method="post">
+        <div style="color: red">@ViewBag.ErrorLogin</div>
+        <div>
+            <label class="text-sm text-gray800">Seu usuário</label>
+            <input type="text" asp-for="Login" class="form-control">
+            <div style="color: red">@Html.ValidationMessageFor(x => x.Login)</div>
+        </div>
+        <div>
+            <label class="text-sm text-gray800">Sua senha</label>
+            <input type="password" asp-for="Senha" class="form-control">
+            <div style="color: red">@Html.ValidationMessageFor(x => x.Senha)</div>
+        </div>
+        <div>
+            <button type="submit" class="btn-default rounded px-4 border-0 text-white hover-shadow w-100 mt-4">Entrar na plataforma</button>
+        </div>
+
+        <footer class="d-flex flex-column align-items-center mt-3">
+            <a asp-controller="Usuarios" asp-action="Create">
+                <p class="text-indigos-light text-xs"><u>Não possui conta crie uma agora</u></p>
+            </a>
+        </footer>
+    </form>
+</div>
+

@@ -1,0 +1,45 @@
+﻿@model Despesas.Models.Conta
+
+@{
+    Layout = "_LayoutDashboard";
+}
+
+<div class="max-w-xl w-100 p-5 rounded-lg bg-white shadow-sm d-flex flex-column align-items-center gap-4">
+    <h2 class="text-indigos-light text-lg m-0 mb-2">@(ViewContext.RouteData.Values["Controller"].ToString())</h2  >
+    <form asp-action="Create" class="w-100 d-flex flex-column gap-4" >
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div >
+            <label class="text-sm text-gray800" asp-for="Valor" class="control-label"></label>
+            <input class="form-control " asp-for="Valor" class="form-control" />
+            <span asp-validation-for="Valor" class="text-danger"></span>
+        </div>
+        <div >
+            <label class="text-sm text-gray800" asp-for="Data" class="control-label"></label>
+            <input class="form-control " asp-for="Data" type="date" class="form-control" />
+            <span asp-validation-for="Data" class="text-danger"></span>
+        </div>
+
+        <div >
+            <label class="text-sm text-gray800" asp-for="Despesa" class="control-label"></label>
+            <select asp-for="DespesaId" asp-items="@ViewBag.despesas" class="form-control ">
+                <option selected>Selecione uma despesa</option>
+            </select>            
+            <span asp-validation-for="Despesa" class="text-danger"></span>
+
+        
+        </div>
+        
+        <div class="form-group mt-4">
+            <button type="submit" value="Criar" class="btn-default border-0 rounded p-3 text-white w-100" >
+                Criar nova categoria
+            </button>
+        </div>
+    </form>
+    <footer class="d-flex flex-column align-items-center mt-3">
+        <a asp-action="Index">
+            <p class="text-indigos-light text-xs"><u>Voltar para o dashboard</u></p>
+        </a>
+    </footer>
+</div>
+
+
